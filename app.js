@@ -13,6 +13,8 @@ var jsonurl = 'https://gist.githubusercontent.com/mgiraldo/cc86b6b043f3ad16a719/
 
 var overlays, geodata, geolayer;
 
+var mapdata, categories = [], subcategories = [];
+
 function showMap(geodata) {
     geolayer = L.geoJson(geodata, {onEachFeature: showPopup});
     // add the points to the map
@@ -23,21 +25,27 @@ function showMap(geodata) {
 
 function showPopup(feature, layer) {
     var key, val;
-    var content = [];
-    for (key in feature.properties) {
-      val = "<strong>" + key + ":</strong> ";
-      val += feature.properties[key];
-      content.push(val);
-    }
-    layer.bindPopup(content.join("<br />"));
+    var html = "";
+    var p = feature.properties;
+    html += "<h1>" + p.event_name + "</h1>";
+    html += "<div class=\"event_page\"><a href=\""+p.event_detail_url+"\">Event page</a></div>";
+    if (p.free) html += "<div class=\"free\">FREE!</div>";
+    if (p.kid_friendly) html += "<div class=\"kid_friendly\">Kid friendly</div>";
+    html += "<div class=\"venue\"><a href=\"http://"+p.venue_website+"\">"+p.venue_name+"</a></div>";
+    html += "<div class=\"category\">Categories: "+p.category + ", " + p.subcategory +"</div>";
+    layer.bindPopup(html);
 }
 
 function geoJSONify(resultarray) {
+  mapdata = {};
+  categories = [];
+  subcategories = [];
   var i, j;
   var result = {};
   result.type = "FeatureCollection";
   result.features = [];
-  var keys = ["event_id",
+  var keys = [
+    // "event_id",
     "event_name",
     "event_detail_url",
     "venue_name",
@@ -49,11 +57,15 @@ function geoJSONify(resultarray) {
   ];
   var l = resultarray.length;
   for (i=0;i<l;i++) {
-    var item = resultarray[i]
+    var item = resultarray[i];
     feature = {};
     feature.type = "Feature";
+    feature.properties = {};
     for (j=0;j<keys.length;j++) {
-      feature.properties[keys[j]] = item[keys[j]];
+      var key = keys[j];
+      feature.properties[key] = item[key];
+      if (key == "category" && categories.indexOf(item[key])==-1) categories.push(item[key]);
+      if (key == "subcategory" && subcategories.indexOf(item[key])==-1) subcategories.push(item[key]);
     }
     feature.geometry = {
       type: "Point",
@@ -65,6 +77,6 @@ function geoJSONify(resultarray) {
 }
 
 $.getJSON(apiurl, function(data){
-  var geojson = geoJSONify(data.results);
-  showMap(geojson);
+  mapdata = geoJSONify(data.results);
+  showMap(mapdata);
 });
