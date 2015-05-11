@@ -10,9 +10,6 @@ var ny_2014 = L.tileLayer( 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png
 // create map with default tileset
 var map = L.map('map', {layers:ny_2014, maxZoom:21, minZoom:13});
 
-// the geojson as it comes from the text document
-var jsonurl = 'https://gist.githubusercontent.com/mgiraldo/cc86b6b043f3ad16a719/raw/f5771610375e21253bae97dbf37f8f9c906478c3/merged.geojson';
-
 var overlays, geodata, geolayer;
 
 var mapdata = [], categories = [], subcategories = [];
