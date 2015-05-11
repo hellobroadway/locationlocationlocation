@@ -1,5 +1,16 @@
-body { 
+body {
 	margin:0;
+}
+
+
+#facets {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #888;
+    border-radius: 3px;
 }
 
 #map {
