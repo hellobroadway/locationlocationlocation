@@ -37,12 +37,12 @@ function showPopup(feature, layer) {
     var key, val;
     var html = "";
     var p = feature.properties;
-    html += "<h1>" + p.event_name + "</h1>";
-    html += "<div class=\"event_page\"><a href=\""+p.event_detail_url+"\">Event page</a></div>";
+    html += "<div class=\"event_name\">" + p.event_name.replace(/[’‘]*/g, "") + "</div>";
     if (p.free) html += "<div class=\"free\">FREE!</div>";
     if (p.kid_friendly) html += "<div class=\"kid_friendly\">Kid friendly</div>";
-    html += "<div class=\"venue\"><a href=\"http://"+p.venue_website+"\">"+p.venue_name+"</a></div>";
+    html += "<div class=\"venue\">At: <a href=\"http://"+p.venue_website+"\">"+p.venue_name+"</a></div>";
     html += "<div class=\"category\">Categories: "+p.category + ", " + p.subcategory +"</div>";
+    html += "<div class=\"event_page\"><a href=\""+p.event_detail_url+"\">View event page</a></div>";
     layer.bindPopup(html);
 }
 
