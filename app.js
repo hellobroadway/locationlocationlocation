@@ -16,11 +16,35 @@ var mapdata = [], categories = [], subcategories = [];
 
 var geodata = [];
 
-// Creates a red marker with the coffee icon
-var redMarker = new L.AwesomeMarkers.icon({
-  icon: 'coffee',
-  markerColor: 'red'
+var colorArray = ['red', 'purple', 'green', 'blue', 'purple', 'darkpuple', 'cadetblue'];
+
+var markers = {};
+// Create color markers for each subcategory:
+markers["Off_Broadway"] = new L.AwesomeMarkers.icon({
+  icon: 'star',
+  iconColor: 'white',
+  markerColor: colorArray[0]
 });
+
+markers["Off_Off_Broadway"] = new L.AwesomeMarkers.icon({
+  icon: 'star',
+  iconColor: 'white',
+  markerColor: colorArray[1]
+});
+
+markers["Broadway"] = new L.AwesomeMarkers.icon({
+  icon: 'star',
+  iconColor: 'white',
+  markerColor: colorArray[2]
+});
+
+markers["Extravaganzas"] = new L.AwesomeMarkers.icon({
+  icon: 'star',
+  iconColor: 'white',
+  markerColor: colorArray[3]
+});
+
+
 
 function showMap() {
 
@@ -30,7 +54,7 @@ function showMap() {
     for (i=0;i<mapdata.length;i++) {
         var geo = L.geoJson(mapdata[i], {
             pointToLayer: function(f,l) {
-                return L.marker(l,{icon:redMarker});
+                return L.marker(l,{icon:markers[mapdata[i].properties.subcategory.replace(/\s/g, "_")]});
             },
             onEachFeature: showPopup});
         geodata.push(geo);
