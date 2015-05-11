@@ -15,10 +15,8 @@ var overlays, geodata, geolayer;
 
 function showMap(geodata) {
     geolayer = L.geoJson(geodata, {onEachFeature: showPopup});
-    
     // add the points to the map
     geolayer.addTo(map);
-    
     // zoom the map to the bounds of the points
     map.fitBounds(geolayer.getBounds());
 }
@@ -35,18 +33,31 @@ function showPopup(feature, layer) {
 }
 
 function geoJSONify(resultarray) {
-  var i;
+  var i, j;
   var result = {};
   result.type = "FeatureCollection";
   result.features = [];
+  var keys = ["event_id",
+    "event_name",
+    "event_detail_url",
+    "venue_name",
+    "venue_website",
+    "category",
+    "subcategory",
+    "free",
+    "kid_friendly"
+  ];
   var l = resultarray.length;
   for (i=0;i<l;i++) {
+    var item = resultarray[i]
     feature = {};
     feature.type = "Feature";
-    feature.properties = resultarray[i];
+    for (j=0;j<keys.length;j++) {
+      feature.properties[keys[j]] = item[keys[j]];
+    }
     feature.geometry = {
       type: "Point",
-      coordinates: [resultarray[i].geocode_longitude,resultarray[i].geocode_latitude]
+      coordinates: [item.geocode_longitude,item.geocode_latitude]
     }
     result.features.push(feature);
   }
