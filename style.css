@@ -1,5 +1,15 @@
-body { 
+body {
 	margin:0;
+}
+
+#facets {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #888;
+    border-radius: 3px;
 }
 
 #map {
@@ -8,4 +18,14 @@ body {
     width:100%;
     top:0;
     bottom: 0;
+}
+
+.leaflet-popup-content {
+    line-height: 1.5em;
+    font-size: 14px;
+}
+
+.event_name {
+    font-size: 1.5em;
+    font-weight: bold;
 }
