@@ -102,15 +102,20 @@ function geoJSONify(resultarray) {
 
 function filterCategory(type, name) {
     var i;
+    var b = new L.LatLngBounds();
     for (i=0;i<mapdata.length;i++) {
         var item = mapdata[i];
         var geo = geodata[i];
         if (item.properties[type] != name) {
             if (map.hasLayer(geo)) map.removeLayer(geo);
         } else {
-            if (!map.hasLayer(geo)) map.addLayer(geo);
+            if (!map.hasLayer(geo)) {
+                map.addLayer(geo);
+            }
+            b.extend(geo.getBounds());
         }
     }
+    map.fitBounds(b);
 }
 
 
