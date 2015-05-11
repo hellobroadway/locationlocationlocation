@@ -16,12 +16,23 @@ var mapdata = [], categories = [], subcategories = [];
 
 var geodata = [];
 
+// Creates a red marker with the coffee icon
+var redMarker = new L.AwesomeMarkers.icon({
+  icon: 'coffee',
+  markerColor: 'red'
+});
+
 function showMap() {
+
     var i;
     // console.log(mapdata);
     var b = new L.LatLngBounds();
     for (i=0;i<mapdata.length;i++) {
-        var geo = L.geoJson(mapdata[i], {onEachFeature: showPopup});
+        var geo = L.geoJson(mapdata[i], {
+            pointToLayer: function(f,l) {
+                return L.marker(l,{icon:redMarker});
+            },
+            onEachFeature: showPopup});
         geodata.push(geo);
         geo.addTo(map);
         map.setView(geo.getBounds().getCenter(), 12);
