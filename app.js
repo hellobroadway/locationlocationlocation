@@ -12,7 +12,26 @@ var map = L.map('map', {layers:ny_2014, maxZoom:21, minZoom:13});
 
 // TRYING GEOLOCATION
 
+var userMarker;
+
 map.locate({setView: true, maxZoom: 16});
+
+map.on('locationfound', function(e) {
+    console.log("found", e);
+    userMarker = L.circleMarker(e.latlng,{
+        fillOpacity: 1,
+        opacity: 1,
+        color: '#009',
+        fillColor: '#ddf',
+        weight: 2,
+        radius: 6
+    });
+    userMarker.addTo(map);
+});
+
+map.on('locationerror', function(e) {
+    console.log("not found");
+});
 
 // END TRYING GEOLOCATION
 
