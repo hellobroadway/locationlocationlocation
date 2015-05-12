@@ -6,40 +6,43 @@
 	<title>Location Location Location</title>
 	<link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.css" />
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.1.2/css/jquery.mmenu.css">
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jQuery.mmenu/5.1.2/js/jquery.mmenu.min.js"></script>
-    <script type="text/javascript">
-            $(function() {
-                    $('nav#filter').mmenu();
-            });
-    </script>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/icons.css" />
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <script src="js/modernizr.custom.js"></script>
 </head>
 <body>
-    <nav id="filter">
-       <ul>
-          <li><a href="#">Category</a>
-             <ul class="Vertical">
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-             </ul>
-          </li>
-          <li><a href="#">Subcategory</a>
-             <ul class="Vertical">
-                <li><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-             </ul>
-          </li>
-       </ul>
-    </nav>
-	<div id="map"></div>
-    <div id="facets">
-        <a href="#filter">Open the menu</a>
-        <select name="categories" id="categories"><option value="">All categories</option></select>
-        <select name="subcategories" id="subcategories"><option value="">All subcategories</option></select>
+    <div id="st-container" class="st-container">
+        <nav class="st-menu st-effect-1" id="menu-9">
+            <h2 class="icon icon-lab">Sidebar</h2>
+            <ul>
+                <li><a class="icon icon-data" href="#">Data Management</a></li>
+                <li><a class="icon icon-location" href="#">Location</a></li>
+                <li><a class="icon icon-study" href="#">Study</a></li>
+                <li><a class="icon icon-photo" href="#">Collections</a></li>
+                <li><a class="icon icon-wallet" href="#">Credits</a></li>
+            </ul>
+        </nav>
+        <div class="st-pusher">
+
+            <div class="st-content"><!-- this is the wrapper for the content -->
+                <div class="st-content-inner">
+                    <div class="main clearfix">
+                    	<div id="map"></div>
+                        <div id="st-trigger-effects" >
+                            <button data-effect="st-effect-1">Menu</button>
+                        </div>
+                        <div id="facets">
+                            <select name="categories" id="categories"><option value="">All categories</option></select>
+                            <select name="subcategories" id="subcategories"><option value="">All subcategories</option></select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 	<script src="app.js"></script>
     <script src="js/classie.js"></script>
