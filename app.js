@@ -163,6 +163,11 @@ function filterCategory(type, name) {
     for (i=0;i<mapdata.length;i++) {
         var item = mapdata[i];
         var geo = geodata[i];
+        if (name == "") {
+            if (!map.hasLayer(geo)) map.addLayer(geo);
+            b.extend(geo.getBounds());
+            continue;
+        }
         if (item.properties[type] != name) {
             if (map.hasLayer(geo)) map.removeLayer(geo);
         } else {
