@@ -18,8 +18,8 @@ var userMarker;
 var userIcon = L.icon({
     iconUrl: './leaflet-awesome/images/noun_14741_cc.svg',
 
-    iconSize:     [90, 90], // size of the icon
-    iconAnchor:   [45, 75], // point of the icon which will correspond to marker's location
+    iconSize:     [17, 38], // size of the icon
+    iconAnchor:   [8, 38], // point of the icon which will correspond to marker's location
     popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 });
 
