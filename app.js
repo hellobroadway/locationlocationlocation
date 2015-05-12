@@ -10,13 +10,19 @@ var ny_2014 = L.tileLayer( 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png
 // create map with default tileset
 var map = L.map('map', {layers:ny_2014, maxZoom:21, minZoom:13});
 
+// TRYING GEOLOCATION
+
+map.locate({setView: true, maxZoom: 16});
+
+// END TRYING GEOLOCATION
+
 var overlays, geodata, geolayer;
 
 var mapdata = [], categories = [], subcategories = [];
 
 var geodata = [];
 
-var colorArray = ['red', 'purple', 'green', 'blue', 'purple', 'darkpuple', 'cadetblue'];
+var colorArray = ['red', 'purple', 'green', 'blue', 'purple', 'darkpurple', 'cadetblue'];
 
 var markers = {};
 // Create color markers for each subcategory:
