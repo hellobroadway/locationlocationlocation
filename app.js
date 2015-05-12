@@ -10,13 +10,41 @@ var ny_2014 = L.tileLayer( 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png
 // create map with default tileset
 var map = L.map('map', {layers:ny_2014, maxZoom:21, minZoom:13});
 
+var userMarker;
+
+var userLat = 0;
+var userLon = 0;
+
+// Incorporate user icon using man icon Created by Klara Zalokar - https://thenounproject.com/klarazalokar/
+var userIcon = L.icon({
+    iconUrl: './leaflet-awesome/images/noun_14741_cc.svg',
+
+    iconSize:     [17, 38], // size of the icon
+    iconAnchor:   [8, 38], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
+map.locate({setView: true, maxZoom: 16});
+
+map.on('locationfound', function(e) {
+    console.log("found", e);
+    userLat = e.latitude;
+    userLon = e.longitude;
+    userMarker = L.marker(e.latlng, {icon: userIcon});
+    userMarker.addTo(map);
+});
+
+map.on('locationerror', function(e) {
+    console.log("not found");
+});
+
 var overlays, geodata, geolayer;
 
 var mapdata = [], categories = [], subcategories = [];
 
 var geodata = [];
 
-var colorArray = ['red', 'purple', 'green', 'blue', 'purple', 'darkpuple', 'cadetblue'];
+var colorArray = ['red', 'purple', 'green', 'blue', 'purple', 'darkpurple', 'cadetblue'];
 
 var markers = {};
 // Create color markers for each subcategory:
@@ -74,9 +102,15 @@ function showPopup(feature, layer) {
     if (p.kid_friendly) html += "<div class=\"kid_friendly\">Kid friendly</div>";
     html += "<div class=\"venue\">At: <a href=\"http://"+p.venue_website+"\">"+p.venue_name+"</a></div>";
     html += "<div class=\"category\">Categories: "+p.category + ", " + p.subcategory +"</div>";
+    html += "<div class=\"directions\">";
+    html += "<a href=\"https://www.google.com/maps/dir/"+( (userLat!=0 && userLon!=0) ? userLat+","+userLon+"/" : "/" )+p.geocode_latitude+","+p.geocode_longitude+"/data=!3m1!4b1!4m2!4m1!3e3\">Google Maps Directions</a>";
+    html += "<br /><a href=\"http://maps.apple.com/?z=16"+( (userLat!=0 && userLon!=0) ? "&saddr="+ userLat+","+userLon : "" )+"&daddr="+p.geocode_latitude+","+p.geocode_longitude+"\">Apple Maps Directions</a>";
+    html += "</div>";
     html += "<div class=\"event_page\"><a href=\""+p.event_detail_url+"\">View event page</a></div>";
     layer.bindPopup(html);
 }
+
+// https://www.google.com/maps/dir/40.7710592,-73.9808833/40.7698559,-73.9843209/
 
 function buildFacets() {
     var i;
@@ -107,6 +141,8 @@ function geoJSONify(resultarray) {
         "venue_name",
         "venue_website",
         "category",
+        "geocode_latitude",
+        "geocode_longitude",
         "subcategory",
         "free",
         "kid_friendly"
@@ -138,6 +174,11 @@ function filterCategory(type, name) {
     for (i=0;i<mapdata.length;i++) {
         var item = mapdata[i];
         var geo = geodata[i];
+        if (name == "") {
+            if (!map.hasLayer(geo)) map.addLayer(geo);
+            b.extend(geo.getBounds());
+            continue;
+        }
         if (item.properties[type] != name) {
             if (map.hasLayer(geo)) map.removeLayer(geo);
         } else {

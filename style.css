@@ -42,6 +42,10 @@ body {
     bottom: 0;
 }
 
+select {
+    font-size: 16px;
+}
+
 .leaflet-popup-content {
     line-height: 1.5em;
     font-size: 14px;
