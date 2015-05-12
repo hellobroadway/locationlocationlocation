@@ -1,0 +1,37 @@
+body {
+  color:#222;
+
+
+  background: url("images/timesquarePURP.png") no-repeat center center fixed; 
+-webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.banner{
+  z-index: 5;
+  margin: 70px auto;
+  width: 70%;
+  color: #fff;
+}
+
+.banner h1 {
+  font-size: 1.35em;
+  font-family:sans-serif;
+  font-weight: 300;
+  text-align:center;
+  text-transform:uppercase;
+  line-height: 1.3em;
+}
+
+.banner img {
+  color: #fff;
+  padding: 1.2em;
+  margin: 60px auto 20px;
+  width: 80%;
+  height:auto;
+  display:inline-block;
+
+}
+
