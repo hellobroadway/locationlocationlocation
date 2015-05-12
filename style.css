@@ -2,6 +2,22 @@ body {
 	margin:0;
 }
 
+#st-trigger-effects {
+    position: absolute;
+    left: 10px;
+    top: 70px;
+}
+
+.st-content-inner {
+    width:100%;
+    height:100%;
+}
+
+.main.clearfix {
+    max-width:100% !important;
+    height:100% !important;
+}
+
 #facets {
     position: absolute;
     right: 10px;
@@ -13,6 +29,12 @@ body {
 }
 
 #map {
+    margin: 0;
+    width:100%;
+    height:100%;
+}
+
+.main {
     margin: 0;
     position: absolute;
     width:100%;
@@ -28,4 +50,17 @@ body {
 .event_name {
     font-size: 1.5em;
     font-weight: bold;
+}
+
+.st-menu {
+    background: #272B34 !important;
+}
+
+button {
+    position: absolute;
+    background: #272B34 !important;
+}
+
+button:hover {
+    background: #000 !important;
 }

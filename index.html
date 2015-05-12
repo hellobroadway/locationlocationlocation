@@ -9,16 +9,42 @@
     <link rel="stylesheet" href="leaflet-awesome/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="leaflet-awesome/font-awesome.min.css">
     <link rel="stylesheet" href="leaflet-awesome/leaflet.awesome-markers.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/icons.css" />
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+    <script src="js/modernizr.custom.js"></script>
 </head>
 <body>
-	<div id="map"></div>
-    <div id="facets">
-        <select name="categories" id="categories"><option value="">All categories</option></select>
-        <select name="subcategories" id="subcategories"><option value="">All subcategories</option></select>
+    <div id="st-container" class="st-container">
+        <nav class="st-menu st-effect-1" id="menu-9">
+            
+            <div id="facets">
+                <select name="categories" id="categories"><option value="">All categories</option></select>
+                <select name="subcategories" id="subcategories"><option value="">All subcategories</option></select>
+            </div>
+        </nav>
+        <div class="st-pusher">
+
+            <div class="st-content"><!-- this is the wrapper for the content -->
+                <div class="st-content-inner">
+                    <div class="main clearfix">
+                    	<div id="map"></div>
+                        <div id="st-trigger-effects" >
+                            <button data-effect="st-effect-1">Menu</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://api.tiles.mapbox.com/mapbox.js/v1.5.0/mapbox.js"></script>
     <script src="leaflet-awesome/leaflet.awesome-markers.min.js"></script>
-	<script src="app.js"></script>
+    <script src="js/classie.js"></script>
+    <script src="js/sidebarEffects.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
