@@ -10,8 +10,6 @@ var ny_2014 = L.tileLayer( 'https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png
 // create map with default tileset
 var map = L.map('map', {layers:ny_2014, maxZoom:21, minZoom:13});
 
-// TRYING GEOLOCATION
-
 var userMarker;
 
 // Incorporate user icon using man icon Created by Klara Zalokar - https://thenounproject.com/klarazalokar/
@@ -28,23 +26,12 @@ map.locate({setView: true, maxZoom: 16});
 map.on('locationfound', function(e) {
     console.log("found", e);
     userMarker = L.marker(e.latlng, {icon: userIcon});
-    // Old userMarker 
-    // userMarker = L.circleMarker(e.latlng,{
-    //     fillOpacity: 1,
-    //     opacity: 1,
-    //     color: '#009',
-    //     fillColor: '#ddf',
-    //     weight: 2,
-    //     radius: 6
-    // });
     userMarker.addTo(map);
 });
 
 map.on('locationerror', function(e) {
     console.log("not found");
 });
-
-// END TRYING GEOLOCATION
 
 var overlays, geodata, geolayer;
 
