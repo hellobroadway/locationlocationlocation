@@ -102,7 +102,10 @@ function showPopup(feature, layer) {
     if (p.kid_friendly) html += "<div class=\"kid_friendly\">Kid friendly</div>";
     html += "<div class=\"venue\">At: <a href=\"http://"+p.venue_website+"\">"+p.venue_name+"</a></div>";
     html += "<div class=\"category\">Categories: "+p.category + ", " + p.subcategory +"</div>";
-    html += "<div class=\"directions\"><a href=\"https://www.google.com/maps/dir/"+( (userLat!=0 && userLon!=0) ? userLat+","+userLon+"/" : "/" )+p.geocode_latitude+","+p.geocode_longitude+"/data=!3m1!4b1!4m2!4m1!3e3\">Get directions</a></div>";
+    html += "<div class=\"directions\">";
+    html += "<a href=\"https://www.google.com/maps/dir/"+( (userLat!=0 && userLon!=0) ? userLat+","+userLon+"/" : "/" )+p.geocode_latitude+","+p.geocode_longitude+"/data=!3m1!4b1!4m2!4m1!3e3\">Google Maps Directions</a>";
+    html += "<br /><a href=\"http://maps.apple.com/?z=16"+( (userLat!=0 && userLon!=0) ? "&saddr="+ userLat+","+userLon : "" )+"&daddr="+p.geocode_latitude+","+p.geocode_longitude+"\">Apple Maps Directions</a>";
+    html += "</div>";
     html += "<div class=\"event_page\"><a href=\""+p.event_detail_url+"\">View event page</a></div>";
     layer.bindPopup(html);
 }
