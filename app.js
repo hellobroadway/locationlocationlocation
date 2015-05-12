@@ -12,6 +12,9 @@ var map = L.map('map', {layers:ny_2014, maxZoom:21, minZoom:13});
 
 var userMarker;
 
+var userLat = 0;
+var userLon = 0;
+
 // Incorporate user icon using man icon Created by Klara Zalokar - https://thenounproject.com/klarazalokar/
 var userIcon = L.icon({
     iconUrl: './leaflet-awesome/images/noun_14741_cc.svg',
@@ -25,6 +28,8 @@ map.locate({setView: true, maxZoom: 16});
 
 map.on('locationfound', function(e) {
     console.log("found", e);
+    userLat = e.latitude;
+    userLon = e.longitude;
     userMarker = L.marker(e.latlng, {icon: userIcon});
     userMarker.addTo(map);
 });
@@ -97,9 +102,12 @@ function showPopup(feature, layer) {
     if (p.kid_friendly) html += "<div class=\"kid_friendly\">Kid friendly</div>";
     html += "<div class=\"venue\">At: <a href=\"http://"+p.venue_website+"\">"+p.venue_name+"</a></div>";
     html += "<div class=\"category\">Categories: "+p.category + ", " + p.subcategory +"</div>";
+    html += "<div class=\"directions\"><a href=\"https://www.google.com/maps/dir/"+p.geocode_latitude+","+p.geocode_longitude+"/"+userLat+","+userLon+"/\">Get directions</a></div>";
     html += "<div class=\"event_page\"><a href=\""+p.event_detail_url+"\">View event page</a></div>";
     layer.bindPopup(html);
 }
+
+// https://www.google.com/maps/dir/40.7710592,-73.9808833/40.7698559,-73.9843209/
 
 function buildFacets() {
     var i;
@@ -130,6 +138,8 @@ function geoJSONify(resultarray) {
         "venue_name",
         "venue_website",
         "category",
+        "geocode_latitude",
+        "geocode_longitude",
         "subcategory",
         "free",
         "kid_friendly"
