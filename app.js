@@ -14,18 +14,29 @@ var map = L.map('map', {layers:ny_2014, maxZoom:21, minZoom:13});
 
 var userMarker;
 
+// Incorporate user icon using man icon Created by Klara Zalokar - https://thenounproject.com/klarazalokar/
+var userIcon = L.icon({
+    iconUrl: './leaflet-awesome/images/noun_14741_cc.svg',
+
+    iconSize:     [90, 90], // size of the icon
+    iconAnchor:   [45, 75], // point of the icon which will correspond to marker's location
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
 map.locate({setView: true, maxZoom: 16});
 
 map.on('locationfound', function(e) {
     console.log("found", e);
-    userMarker = L.circleMarker(e.latlng,{
-        fillOpacity: 1,
-        opacity: 1,
-        color: '#009',
-        fillColor: '#ddf',
-        weight: 2,
-        radius: 6
-    });
+    userMarker = L.marker(e.latlng, {icon: userIcon});
+    // Old userMarker 
+    // userMarker = L.circleMarker(e.latlng,{
+    //     fillOpacity: 1,
+    //     opacity: 1,
+    //     color: '#009',
+    //     fillColor: '#ddf',
+    //     weight: 2,
+    //     radius: 6
+    // });
     userMarker.addTo(map);
 });
 
